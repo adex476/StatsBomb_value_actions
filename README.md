@@ -1,6 +1,3 @@
-# StatsBomb_value_actions
-
-
 # StatsBomb Value Actions & Possession Explorer
 
 A lightweight pipeline and notebook suite to:
@@ -13,9 +10,9 @@ A lightweight pipeline and notebook suite to:
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
-### 1 Environment
+### 1) Environment
 ```bash
 # Recommended: conda or venv
 conda create -n soccer_data python=3.10 -y
@@ -25,7 +22,8 @@ conda activate soccer_data
 pip install pandas numpy matplotlib mplsoccer scikit-learn lightgbm shap tqdm jupyter
 ```
 
-### 2 Files in this repo
+### 2) Files in this repo
+```
 .
 ├─ Soccer_data.ipynb            # Pull/clean + build compact event tables
 ├─ Soccer_data_verify.ipynb     # Sanity checks: schema, nulls, dedupes, possession alignment
@@ -40,7 +38,7 @@ pip install pandas numpy matplotlib mplsoccer scikit-learn lightgbm shap tqdm ju
 
 ---
 
-## 📦 Data Artifacts
+## Data Artifacts
 
 ### `events_compact.csv`
 - One row per **event** with core columns like: `minute, second, team, player, x, y, end_x, end_y, event, xg`.  
@@ -52,16 +50,17 @@ pip install pandas numpy matplotlib mplsoccer scikit-learn lightgbm shap tqdm ju
 ### `sequence.json`
 - A tiny example sequence (pass → carry → shot, etc.) used for quick visualization demos in the notebooks.
 
+---
 
-## 📒 Notebooks (run in this order)
+## Notebooks (run in this order)
 
 1. **`Soccer_data.ipynb`**
    - Loads raw/JSON events (or your own feed).
-   - Cleans & flattens columns, standardizes coordinates (0–120 x 0–80), and exports `events_compact.csv`.
+   - Cleans & flattens columns, standardizes coordinates (0–120 x 0–80), and exports **`events_compact.csv`**.
 
 2. **`Soccer_data_verify.ipynb`**
    - Validates schema, checks nulls/dupes, and verifies possession stitching.
-   - Produces `possessions.csv` with possession-level aggregates.
+   - Produces **`possessions.csv`** with possession-level aggregates.
 
 3. **`Soccer_modeling.ipynb`**
    - Feature engineering (progress, carries, pressures, last-action context, etc.).
@@ -70,7 +69,9 @@ pip install pandas numpy matplotlib mplsoccer scikit-learn lightgbm shap tqdm ju
 
 > Tip: If you’re using custom competitions or seasons, parameterize the “ingest” cell at the top of `Soccer_data.ipynb`.
 
-## 🖼️ Example: Render a Sequence on a Pitch
+---
+
+## Example: Render a Sequence on a Pitch
 
 The snippet below shows how to replay **`sequence.json`** on a pitch with `mplsoccer`. Tweak markers/arrows to your style.
 
@@ -100,7 +101,9 @@ ax.set_title("Demo Sequence Replay", fontsize=14)
 plt.show()
 ```
 
-## 🧠 Modeling Notes
+---
+
+## Modeling Notes
 
 - **Targets:** start simple (e.g., shot vs. no shot), then try possession value (EPV-like) or xG-on-possession.  
 - **Features:** progress, last action, carry distance, pressure counts, entry zones, team possession %, rolling player form, etc.  
@@ -109,7 +112,7 @@ plt.show()
 
 ---
 
-## 🗺️ Roadmap
+## Roadmap
 
 - Rolling & opponent-context features (recent xG for/against, field tilt).
 - Spatial enrichments (zones, thirds, pressure heat, Voronoi/nearest-defender if available).
@@ -118,7 +121,7 @@ plt.show()
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 PRs & issues welcome! If you add datasets or models, include:
 - short description, schema, and license,
@@ -127,7 +130,7 @@ PRs & issues welcome! If you add datasets or models, include:
 
 ---
 
-## 📜 License & Data
+## License & Data
 
 - **Code:** MIT (or your preferred OSS license—update this line if you choose another).  
 - **Data:** Respect the terms of your data provider (e.g., StatsBomb Open Data). Do not redistribute data files without permission.
